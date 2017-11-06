@@ -11,7 +11,7 @@ RCT_EXPORT_METHOD(isSupported: (RCTResponseSenderBlock)callback)
     LAContext *context = [[LAContext alloc] init];
     NSError *error;
 
-    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
+    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthentication error:&error]) {
         callback(@[[NSNull null], @true]);
         // Device does not support TouchID
     } else {
@@ -27,9 +27,9 @@ RCT_EXPORT_METHOD(authenticate: (NSString *)reason
     NSError *error;
 
     // Device has TouchID
-    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
+    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthentication error:&error]) {
         // Attempt Authentification
-        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
+        [context evaluatePolicy:LAPolicyDeviceOwnerAuthentication
                 localizedReason:reason
                           reply:^(BOOL success, NSError *error)
          {
